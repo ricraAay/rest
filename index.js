@@ -1,11 +1,10 @@
 import express from 'express'
 import 'dotenv/config'
 
-import db from './database/index.js'
+import db from './src/database/index.js'
 
-import catalogRouter from './router/catalog.router.js'
-import recordsCatalogForChat from './router/recordsCatalogForChat.router.js'
-
+import catalogRouter from './src/router/catalog.router.js'
+import recordsCatalogForChat from './src/router/recordsCatalogForChat.router.js'
 
 const app = express()
 
