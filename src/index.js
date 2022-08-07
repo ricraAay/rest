@@ -3,7 +3,6 @@ import 'dotenv/config'
 
 import db from './database/index.js'
 
-import usersRouter from './router/users.router.js'
 import catalogRouter from './router/catalog.router.js'
 import recordsCatalogForChat from './router/recordsCatalogForChat.router.js'
 
@@ -12,7 +11,6 @@ const app = express()
 
 app.use(express.json())
 
-app.use('/api', usersRouter)
 app.use('/api', catalogRouter)
 app.use('/api', recordsCatalogForChat)
 
