@@ -14,6 +14,6 @@ app.use('/api', catalogRouter)
 app.use('/api', recordsCatalogForChat)
 
 app.listen(process.env.PORT, async () => {
-  await db.sync({ force: false })
+  //await db.sync({ force: false })
   console.log(`Example app listening on port ${process.env.PORT}!`)
 })
