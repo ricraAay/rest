@@ -1,9 +1,8 @@
 import { Router } from 'express'
-import CatalogController from '../controller/catalog.controller'
+import CatalogController from '../controller/catalog.controller.js'
 
 const router = new Router ()
 
-router.get('/catalog', CatalogController.getAll)
-router.get('/catalog/:name', CatalogController.getOne)
+router.get('/allCatalogForUser/:tlgUserId', CatalogController.getAllCatalogForUser)
 
 export default router
