@@ -1,7 +1,8 @@
 import { DataTypes, Model } from 'sequelize'
+import db from '../index.js'
 
-export default class CatalogEntities extends Model {
-  static define (userConnection) {
+class CatalogEntities extends Model {
+  static define (db) {
     return super.init({
       id: {
         type: DataTypes.UUID,
@@ -23,8 +24,12 @@ export default class CatalogEntities extends Model {
         type: DataTypes.STRING
       }
     }, {
-      sequelize: userConnection,
-      tableName: 'catalog'
+      sequelize: db,
+      tableName: 'catalog',
+      createdAt: false,
+      updatedAt: false
     })
   }
 }
+
+export default CatalogEntities.define(db)

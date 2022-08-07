@@ -1,7 +1,8 @@
 import { DataTypes, Model } from 'sequelize'
+import db from '../index.js'
 
-export default class RecordsCatalogEntities extends Model {
-  static define (userConnection) {
+class RecordsCatalogEntities extends Model {
+  static define (db) {
     return super.init({
       id: {
         type: DataTypes.UUID,
@@ -19,9 +20,6 @@ export default class RecordsCatalogEntities extends Model {
       modifyed_on: {
         type: DataTypes.DATE
       },
-      name: {
-        type: DataTypes.STRING
-      },
       user_id: {
         type: DataTypes.UUID
       },
@@ -38,8 +36,12 @@ export default class RecordsCatalogEntities extends Model {
         type: DataTypes.UUID
       }
     }, {
-      sequelize: userConnection,
-      tableName: 'records_catalog'
+      sequelize: db,
+      tableName: 'records_catalog',
+      createdAt: false,
+      updatedAt: false
     })
   }
 }
+
+export default RecordsCatalogEntities.define(db)

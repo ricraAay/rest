@@ -1,23 +1,12 @@
 import { DataTypes, Model } from 'sequelize'
+import db from '../index.js'
 
-export default class ChatsEntities extends Model {
-  static define (userConnection) {
+class ChatsEntities extends Model {
+  static define (db) {
     return super.init({
       id: {
         type: DataTypes.UUID,
         primaryKey: true
-      },
-      created_by: {
-        type: DataTypes.UUID
-      },
-      created_on: {
-        type: DataTypes.DATE
-      },
-      modifyed_by: {
-        type: DataTypes.UUID
-      },
-      modifyed_on: {
-        type: DataTypes.DATE
       },
       name: {
         type: DataTypes.STRING
@@ -26,8 +15,12 @@ export default class ChatsEntities extends Model {
         type: DataTypes.NUMBER
       }
     }, {
-      sequelize: userConnection,
-      tableName: 'chats'
+      sequelize: db,
+      tableName: 'chats',
+      createdAt: false,
+      updatedAt: false
     })
   }
 }
+
+export default ChatsEntities.define(db)
