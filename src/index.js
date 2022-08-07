@@ -1,14 +1,22 @@
 import express from 'express'
 import 'dotenv/config'
-//import router from './router/index.js'
-import database from './database/index.database.js'
+
+import db from './database/index.js'
+
+import usersRouter from './router/users.router.js'
+import catalogRouter from './router/catalog.router.js'
+import recordsCatalogForChat from './router/recordsCatalogForChat.router.js'
+
 
 const app = express()
 
 app.use(express.json())
-//app.use('/api', router)
+
+app.use('/api', usersRouter)
+app.use('/api', catalogRouter)
+app.use('/api', recordsCatalogForChat)
 
 app.listen(process.env.PORT, async () => {
-  await database.userConnection.sync({ force: false })
+  await db.sync({ force: false })
   console.log(`Example app listening on port ${process.env.PORT}!`)
 })
