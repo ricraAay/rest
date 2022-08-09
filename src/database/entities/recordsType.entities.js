@@ -8,19 +8,10 @@ class RecordsTypeEntities extends Model {
         type: DataTypes.UUID,
         primaryKey: true
       },
-      created_by: {
-        type: DataTypes.UUID
+      tlg_type: {
+        type: DataTypes.STRING
       },
-      created_on: {
-        type: DataTypes.DATE
-      },
-      modifyed_by: {
-        type: DataTypes.UUID
-      },
-      modifyed_on: {
-        type: DataTypes.DATE
-      },
-      name: {
+      description: {
         type: DataTypes.STRING
       }
     }, {

@@ -34,6 +34,9 @@ class RecordsCatalogEntities extends Model {
       },
       catalog_id: {
         type: DataTypes.UUID
+      },
+      caption: {
+        type: DataTypes.STRING
       }
     }, {
       sequelize: db,

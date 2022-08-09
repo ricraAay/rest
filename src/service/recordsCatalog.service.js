@@ -2,6 +2,7 @@ import usersEntityService from '../database/service/usersEntity.service.js'
 import chatsEntityService from '../database/service/chatsEntity.service.js'
 import catalogEntityService from '../database/service/catalogEntity.service.js'
 import recordCatalogEntiyService from '../database/service/recordsCatalogEntity.service.js'
+import recordTypeEntityService from '../database/service/recordTypeEntity.service.js'
 
 class RecordsCatalogService {
   
@@ -46,7 +47,24 @@ class RecordsCatalogService {
     return catalogResult.dataValues.id
   }
 
-  async createForChat ({ tlgUserId, tlgChatId, tlgChatName, tlgUserName, content, catalogName }) {
+  async _getRecordType ({ type }) {
+    let typeResult = await recordTypeEntityService.getType({ type })
+    return typeResult[0].dataValues.id
+  }
+
+  async createForChat (payload) {
+
+    const { 
+      tlgUserId, 
+      tlgChatId, 
+      tlgChatName, 
+      tlgUserName, 
+      content, 
+      catalogName, 
+      type, 
+      caption 
+    } = payload
+
     // Получение идентификатора чата
     const chatId = await this._getChat({ 
       tlgChatId, 
@@ -66,12 +84,18 @@ class RecordsCatalogService {
       catalogName 
     })
 
+    const typeId = await this._getRecordType({ 
+      type 
+    })
+
     // Создание новой записи
     return await recordCatalogEntiyService.create({  
       chatId, 
       userId, 
       content, 
-      catalogId 
+      catalogId,
+      typeId,
+      caption
     })
 
   }
