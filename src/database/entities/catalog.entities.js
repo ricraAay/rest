@@ -22,6 +22,12 @@ class CatalogEntities extends Model {
       },
       name: {
         type: DataTypes.STRING
+      },
+      chat_id: {
+        type: DataTypes.UUID
+      },
+      user_id: {
+        type: DataTypes.UUID
       }
     }, {
       sequelize: db,

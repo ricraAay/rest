@@ -54,6 +54,8 @@ class RecordsCatalogService {
 
   async createForChat (payload) {
 
+    console.log("payload from service: ", payload)
+
     const { 
       tlgUserId, 
       tlgChatId, 
@@ -77,27 +79,28 @@ class RecordsCatalogService {
       tlgUserName 
     })
 
-    // Получение идентификатора каталога
-    const catalogId = await this._getOneCatalogSpecificForChat({ 
-      chatId,
-      userId,
-      catalogName 
-    })
-
     const typeId = await this._getRecordType({ 
       type 
     })
 
-    // Создание новой записи
-    return await recordCatalogEntiyService.create({  
-      chatId, 
-      userId, 
-      content, 
-      catalogId,
-      typeId,
-      caption
-    })
+    catalogName.forEach(async (catalog) => {
+      // Получение идентификатора каталога
+      const catalogId = await this._getOneCatalogSpecificForChat({ 
+        chatId,
+        userId,
+        catalogName: catalog
+      })
 
+      // Создание новой записи
+      return await recordCatalogEntiyService.create({  
+        chatId, 
+        content, 
+        catalogId,
+        typeId,
+        caption,
+        userId
+      })
+    })
   }
 }
 

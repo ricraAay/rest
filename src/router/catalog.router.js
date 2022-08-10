@@ -3,6 +3,6 @@ import CatalogController from '../controller/catalog.controller.js'
 
 const router = new Router ()
 
-router.get('/allCatalogForUser/:tlgUserId', CatalogController.getAllCatalogForUser)
+router.get('/catalog/:tlgChatId', CatalogController.getCatalog)
 
 export default router

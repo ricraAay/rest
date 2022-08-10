@@ -1,24 +1,29 @@
 import CatalogEntityService from '../database/service/catalogEntity.service.js'
-import UsersEntityService from '../database/service/usersEntity.service.js'
+import ChatsEntityService from '../database/service/chatsEntity.service.js'
 
 class CatalogService {
-  static async getAllCatalogForUser ({ tlgUserId }) {
+  async getCatalog ({ tlgChatId }) {
+
+    console.log(tlgChatId)
+
     const errorMessage = 'Вы не создали еще ни одного каталога'
-    const row = await UsersEntityService.getUser({ tlgUserId })
+    const row = await ChatsEntityService.getChat({ tlgChatId })
 
-    const userId = row[0]?.dataValues.id
+    console.log(row)
 
-    if (!userId) {
+    const chatId = row[0]?.dataValues.id
+
+    if (!chatId) {
       throw new Error(errorMessage)
     }
 
-    const result = await CatalogEntityService.getAllCatalogForUser({ userId })
+    const result = await CatalogEntityService.getAllCatalogForChat({ chatId })
 
     if (!result.length) {
       throw new Error(errorMessage)
     }
 
-    return result
+    return result.map(item => item.dataValues.name)
   }
 }
 
